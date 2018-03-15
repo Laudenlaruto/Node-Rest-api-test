@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+var handler = require('./handler');
+var db = require('./db');
 
 app.get('/', function(req, res) {
   res.send({
