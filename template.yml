@@ -20,7 +20,7 @@ Resources:
             Properties:
                 Path: /notes
                 Method: post
-            
+
 
   HelloWorld:
       Type: AWS::Serverless::Function
@@ -41,6 +41,3 @@ Resources:
             Properties:
               Path: /
               Method: post
-
-plugins:
-- serverless-offline # adding the plugin to be able to run the offline emulation
