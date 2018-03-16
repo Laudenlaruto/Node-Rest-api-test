@@ -21,7 +21,7 @@ Resources:
           create:
             Type: Api
             Properties:
-                Path: /notes
+                Path: /note
                 Method: post
           GetEvent:
             Type: Api
