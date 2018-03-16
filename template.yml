@@ -13,7 +13,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      Runtime: nodejs4.3
+      Runtime: nodejs6.10
       Events:
           create:
             handler: handler.create # point to exported create function in handler.js
@@ -22,10 +22,26 @@ Resources:
                   path: notes # path will be domain.name.com/dev/notes
                   method: post
                   cors: true
-            getOne:
-              handler: handler.getOne
-              events:
-                - http:
-                    path: notes/{id} # path will be domain.name.com/dev/notes/1
-                    method: get
-                    cors: true
+            
+  HelloWorld:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: index.handler
+        Runtime: nodejs6.10
+        Role:
+          Fn::ImportValue:
+            !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+        Events:
+          GetEvent:
+            Type: Api
+            Properties:
+              Path: /
+              Method: get
+          PostEvent:
+            Type: Api
+            Properties:
+              Path: /
+              Method: post
+
+plugins:
+- serverless-offline # adding the plugin to be able to run the offline emulation
