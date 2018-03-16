@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 const connectToDatabase = require('./db');
 const Note = require('./models/Note');
-require("mongoose").Promise = require("bluebird");
+//require("mongoose").Promise = require("bluebird");
 require('dotenv').config({ path: './variables.env' });
 
 app.get('/', function(req, res) {
@@ -18,6 +18,7 @@ app.post('/', function(req, res) {
       "Output": "Hello World!"
    });
 });
+
 app.post('/note', function(req, res){
   console.log(req.body);
   const note = {
@@ -35,7 +36,6 @@ app.post('/note', function(req, res){
           res.status(500).json(note);
         });
     });
-
 });
 
 //app.listen(3000);
