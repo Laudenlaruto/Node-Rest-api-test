@@ -16,13 +16,12 @@ Resources:
       Runtime: nodejs6.10
       Events:
           create:
-            handler: handler.create # point to exported create function in handler.js
-            events:
-              - http:
-                  path: notes # path will be domain.name.com/dev/notes
-                  method: post
-                  cors: true
+            Type: Api
+            Properties:
+                Path: /notes
+                Method: post
             
+
   HelloWorld:
       Type: AWS::Serverless::Function
       Properties:
