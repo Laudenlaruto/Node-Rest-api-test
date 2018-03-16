@@ -1,7 +1,10 @@
 var express = require('express');
 var app = express();
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
 const connectToDatabase = require('./db');
 const Note = require('./models/Note');
+require("mongoose").Promise = require("bluebird");
 require('dotenv').config({ path: './variables.env' });
 
 app.get('/', function(req, res) {
@@ -11,26 +14,28 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-  res.send({
-    "Output": "Hello World!"
-  });
+
 });
-app.post('/notes', function(event, err){
+app.post('/note', function(req, res){
+  console.log(req.body);
+  const note = {
+    title: req.body.title,
+    description: req.body.description
+  }
   connectToDatabase()
     .then(() => {
-      Note.create(JSON.parse(event.body))
-        .then(note => callback(null, {
-          statusCode: 200,
-          body: JSON.stringify(note)
-        }))
-        .catch(err => callback(null, {
-          statusCode: err.statusCode || 500,
-          headers: { 'Content-Type': 'text/plain' },
-          body: 'Could not create the note.'
-        }));
+      Note.create(note)
+        .then(function(note) {
+          console.log(note);
+          res.status(200).json(note);
+        })
+        .catch(function(note){
+          res.status(500).json(note);
+        });
     });
+
 });
 
-
+//app.listen(3000);
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app
