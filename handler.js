@@ -1,4 +1,4 @@
-'use strict';
+  'use strict';
 
 module.exports.create = (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
