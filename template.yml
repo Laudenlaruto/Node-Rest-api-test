@@ -9,19 +9,6 @@ Parameters:
     Description: AWS CodeStar projectID used to associate new resources to team members
 
 Resources:
-  Notes:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: index.handler
-      Runtime: nodejs6.10
-      Events:
-          create:
-            Type: Api
-            Properties:
-                Path: /notes
-                Method: post
-
-
   HelloWorld:
       Type: AWS::Serverless::Function
       Properties:
@@ -31,6 +18,11 @@ Resources:
           Fn::ImportValue:
             !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
         Events:
+          create:
+            Type: Api
+            Properties:
+                Path: /notes
+                Method: post
           GetEvent:
             Type: Api
             Properties:
