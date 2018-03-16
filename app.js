@@ -14,7 +14,9 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-
+  res.send({
+      "Output": "Hello World!"
+   });
 });
 app.post('/note', function(req, res){
   console.log(req.body);
