@@ -43,8 +43,10 @@ app.get('/notes', function getAllNotes(req, res) {
     .then(() =>{
       Note.find()
         .then((notes) =>{
+          console.log(notes);
           res.send({
-            notes
+            "Status":"ok",
+            "Notes":notes
           });
         })
         .catch((err) =>{
@@ -52,7 +54,7 @@ app.get('/notes', function getAllNotes(req, res) {
         });
     })
 });
-app.update('/note/:id',function updateNote(req, res) {
+app.patch('/note/:id',function updateNote(req, res) {
   connectToDatabase()
     .then(() =>{
       Note.findByIdAndUpdate(req.params.id, JSON.parse(req.body),{new: true})
