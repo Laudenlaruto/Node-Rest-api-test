@@ -4,23 +4,8 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 const connectToDatabase = require('./db');
 const Note = require('./models/Note');
-//require("mongoose").Promise = require("bluebird");
-require('dotenv').config({ path: './variables.env' });
 
-app.get('/', function(req, res) {
-  res.send({
-    "Output": "Hello World!"
-  });
-});
-
-app.post('/', function(req, res) {
-  res.send({
-      "Output": "Hello World!"
-   });
-});
-
-app.post('/note', function(req, res){
-  console.log(req.body);
+app.post('/note', function createNote(req, res){
   const note = {
     title: req.body.title,
     description: req.body.description
@@ -38,6 +23,46 @@ app.post('/note', function(req, res){
     });
 });
 
-//app.listen(3000);
+app.get('/note/:id', function getNote(req, res){
+  connectToDatabase()
+    .then(() =>{
+      Note.findById(req.params.id)
+        .then((note) =>{
+            res.send({
+              "title":note.title,
+              "description":note.description
+            });
+        })
+        .catch((err) => {
+            res.send(err.message);
+        });
+    });
+});
+app.get('/notes', function getAllNotes(req, res) {
+  connectToDatabase()
+    .then(() =>{
+      Note.find()
+        .then((notes) =>{
+          res.send({
+            notes
+          });
+        })
+        .catch((err) =>{
+          res.send(err.message)
+        });
+    })
+});
+app.delete('/note/:id', function deleteNote(req, res) {
+  connectToDatabase()
+    .then(() =>{
+      Note.findByIdAndRemove(req.params.id)
+        .then((note) =>{
+          res.send({message : 'Removed note with id: ' + note._id, note: note})
+        }).catch((err) =>{
+          res.send(err.message)
+        });
+    })
+});
+app.listen(3000);
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app
