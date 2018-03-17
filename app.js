@@ -55,9 +55,13 @@ app.get('/notes', function getAllNotes(req, res) {
     })
 });
 app.patch('/note/:id',function updateNote(req, res) {
+  const note = {
+    title: req.body.title,
+    description: req.body.description
+  }
   connectToDatabase()
     .then(() =>{
-      Note.findByIdAndUpdate(req.params.id, JSON.parse(req.body),{new: true})
+      Note.findByIdAndUpdate(req.params.id, note,{new: true})
         .then((note) =>{
           res.send({note})
         })
