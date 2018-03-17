@@ -33,4 +33,13 @@ Resources:
             Properties:
               Path: /notes
               Method: get
-          
+          update:
+            Type: Api
+            Properties:
+              Path: /note/{id}
+              Method: update
+          delete:
+            Type: Api
+            Properties:
+              Path: /note/{id}
+              Method: delete
