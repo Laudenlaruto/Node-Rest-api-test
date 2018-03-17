@@ -1,57 +1,54 @@
-Welcome to the AWS CodeStar sample web service
+# Welcome to the AWS CodeStar - Lamda API with node.js and express
 ==============================================
 
-This sample code helps get you started with a simple Express web service
-deployed by AWS CloudFormation to AWS Lambda and Amazon API Gateway.
+This sample code aims to test how API call work with node.js & express
 
-What's Here
+I built a simple API to manipulate notes, title and description.
+Technologies used:
+  * AWS Codestar for pipeline integration
+  * AWS Lambda
+  * AWS API gateway
+  * Mongodb Atlas cloud database  
+
+
+# What's Here
 -----------
 
 This sample includes:
 
 * README.md - this file
-* buildspec.yml - this file is used by AWS CodeBuild to package your
-  service for deployment to AWS Lambda
-* app.js - this file contains the sample Node.js code for the web service
+* buildspec.yml - this file is used by AWS CodeBuild to package services for deployment to AWS Lambda
+* app.js - this file contains the Node.js code for the API logique
+* db.js - this file contaons the logique to connect to Mongodb database
 * index.js - this file contains the AWS Lambda handler code
 * template.yml - this file contains the AWS Serverless Application Model (AWS SAM) used
-  by AWS CloudFormation to deploy your service to AWS Lambda and Amazon API
-  Gateway.
-* tests/ - this directory contains unit tests for your application
+  by AWS CloudFormation to deploy services to AWS Lambda and Amazon API Gateway.
+* tests/ - this directory contains unit tests for your application - not yet implemented
 
-
-What Do I Do Next?
+# How to use it
 ------------------
+## Change **host** by the AWS endpoint.
+### To list all notes
+```
+curl http://host/notes
+```
 
-If you have checked out a local copy of your repository you can start making
-changes to the sample code.  We suggest making a small change to app.js first,
-so you can see how changes pushed to your project's repository are automatically
-picked up by your project pipeline and deployed to AWS Lambda and Amazon API Gateway.
-(You can watch the pipeline progress on your AWS CodeStar project dashboard.)
-Once you've seen how that works, start developing your own code, and have fun!
+### To list a single note
+```
+curl http://host/note/note_id
+```
 
-To run your tests locally, go to the root directory of the 
-sample code and run the `npm test` command, which
-AWS CodeBuild also runs through your `buildspec.yml` file.
- 
-To test your new code during the release process, modify the existing tests or 
-add tests to the tests directory. AWS CodeBuild will run the tests during the 
-build stage of your project pipeline. You can find the test results
-in the AWS CodeBuild console.
- 
-Learn more about AWS CodeBuild and how it builds and tests your application here:
-https://docs.aws.amazon.com/codebuild/latest/userguide/concepts.html
- 
-Learn more about AWS Serverless Application Model (AWS SAM) and how it works here:
-https://github.com/awslabs/serverless-application-model/blob/master/HOWTO.md
+### To create a note
+```
+curl -d '{"title":"Les misérables", "description":"Good book"}' -H "Content-Type: application/json" -X POST http://host/note
+```
 
-AWS Lambda Developer Guide:
-http://docs.aws.amazon.com/lambda/latest/dg/deploying-lambda-apps.html
+### To update a note
+```
+curl -d '{"title":"Les misérables", "description":"Not so good of a book"}' -H "Content-Type: application/json" -X PATCH http://host/note/note_id
+```
 
-Learn more about AWS CodeStar by reading the user guide, and post questions and
-comments about AWS CodeStar on our forum.
-
-AWS CodeStar User Guide:
-http://docs.aws.amazon.com/codestar/latest/userguide/welcome.html
-
-AWS CodeStar Forum: https://forums.aws.amazon.com/forum.jspa?forumID=248
+### To delete a note
+```
+curl -X DELETE http://host/note/note_id
+```
