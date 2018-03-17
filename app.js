@@ -23,7 +23,7 @@ app.post('/note', function createNote(req, res){
     });
 });
 
-app.get('/note/:id', function getNote(req, res){
+app.get('/note/:id', function getOneNote(req, res){
   connectToDatabase()
     .then(() =>{
       Note.findById(req.params.id)
