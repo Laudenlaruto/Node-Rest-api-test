@@ -21,8 +21,8 @@ Resources:
           create:
             Type: Api
             Properties:
-                Path: /note
-                Method: post
+              Path: /note
+              Method: post
           getOne:
             Type: Api
             Properties:
@@ -37,7 +37,7 @@ Resources:
             Type: Api
             Properties:
               Path: /note/{id}
-              Method: update
+              Method: patch
           delete:
             Type: Api
             Properties:
