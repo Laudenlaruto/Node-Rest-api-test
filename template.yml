@@ -23,13 +23,14 @@ Resources:
             Properties:
                 Path: /note
                 Method: post
-          GetEvent:
+          getOne:
             Type: Api
             Properties:
-              Path: /
+              Path: /note/{id}
               Method: get
-          PostEvent:
+          getAll:
             Type: Api
             Properties:
-              Path: /
-              Method: post
+              Path: /notes
+              Method: get
+          

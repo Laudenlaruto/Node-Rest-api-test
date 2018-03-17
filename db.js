@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 let isConnected;
+require('dotenv').config({ path: './variables.env' }) ;
 
 module.exports = connectToDatabase = () => {
   if (isConnected) {
