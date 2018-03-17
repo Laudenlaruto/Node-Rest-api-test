@@ -52,6 +52,18 @@ app.get('/notes', function getAllNotes(req, res) {
         });
     })
 });
+app.update('/note/:id',function updateNote(req, res) {
+  connectToDatabase()
+    .then(() =>{
+      Note.findByIdAndUpdate(req.params.id, JSON.parse(req.body),{new: true})
+        .then((note) =>{
+          res.send({note})
+        })
+        .catch((err) =>{
+          res.send(err.message)
+        });
+    });
+});
 app.delete('/note/:id', function deleteNote(req, res) {
   connectToDatabase()
     .then(() =>{
