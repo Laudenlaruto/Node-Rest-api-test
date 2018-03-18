@@ -27,7 +27,7 @@ This sample includes:
 
 # How to use it
 ------------------
-## Change **host** by the AWS endpoint.
+## Change **host** by the AWS endpoint and **note_id** with a note id.
 ### To list all notes
 ```
 curl http://host/notes
