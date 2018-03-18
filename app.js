@@ -4,7 +4,12 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 const connectToDatabase = require('./db');
 const Note = require('./models/Note');
-
+app.get('/', function getProject(req, res) {
+  res.send({
+    "Project":"Hello this a Rest API for simple Notes",
+    "URL":"https://github.com/Laudenlaruto/Node-Rest-api-test/"
+  })
+})
 app.post('/note', function createNote(req, res){
   const note = {
     title: req.body.title,

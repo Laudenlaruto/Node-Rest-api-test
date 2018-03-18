@@ -18,6 +18,11 @@ Resources:
           Fn::ImportValue:
             !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
         Events:
+          main:
+            Type: Api
+            Properties:
+              Path: /
+              Method: get
           create:
             Type: Api
             Properties:
