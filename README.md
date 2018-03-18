@@ -1,7 +1,6 @@
 # Welcome to the AWS CodeStar - Lamda API with node.js and express
-==============================================
-
-This sample code aims to test how API call work with node.js & express
+------------
+This sample code aims to test how CRUD API call work with node.js, express & AWS
 
 I built a simple API to manipulate notes, title and description.
 Technologies used:
@@ -27,7 +26,7 @@ This sample includes:
 
 # How to use it
 ------------------
-## Change **host** by the AWS endpoint and **note_id** with a note id.
+Change **http://host** by the AWS endpoint and **note_id** with a note id.
 ### To list all notes
 ```
 curl http://host/notes
