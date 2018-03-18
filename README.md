@@ -9,7 +9,6 @@ Technologies used:
   * AWS API gateway
   * Mongodb Atlas cloud database  
 
-
 # What's Here
 -----------
 
@@ -26,7 +25,11 @@ This sample includes:
 
 # How to use it
 ------------------
+<<<<<<< HEAD
 Change **http://host** by the AWS endpoint and **note_id** with a note id.
+=======
+## Change **host** by the AWS endpoint and **note_id** with a note id.
+>>>>>>> a607cd156e4133a428974915d6ea46fce914e9e8
 ### To list all notes
 ```
 curl http://host/notes
